@@ -6,6 +6,7 @@ import Message from "./Message.svelte";
 import Information from "./Information.svelte";
 import {api} from "../stores";
 
+import {fade} from 'svelte/transition';
 
 let title = "Check Data";
 let file = null;
@@ -19,10 +20,14 @@ let loading = false;
 
 async function onSubmit() {
   loading = true;
+  entered = true;
+
   const data = new FormData();
   if(!file)
   {
     loading = false;
+    setTimeout(() => {entered = false}, 3000)
+
     return;
   }
   data.append("img_to_check", file[0]);
@@ -32,18 +37,15 @@ async function onSubmit() {
       body: data
   });
   
+  loading = false;
   if(response.ok)
   {
     const json = await response.json();
     foundData = json.data;
     found = true;
-    console.log(foundData);
+    window.scrollByLines(50);
   }
-  else
-  {
-    console.log("ERRORR!!");
-  }
-  loading = false;
+  setTimeout(() => {entered = false}, 3000)
 }
 
 </script>

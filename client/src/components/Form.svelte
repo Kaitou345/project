@@ -6,6 +6,7 @@
   import TextInputLg from "./TextInputLg.svelte";
   import Message from './Message.svelte';
   import {api} from "../stores";
+  import {fade} from 'svelte/transition';
 
 
   export let name;
@@ -84,7 +85,7 @@
       <TextInput bind:text={contact_number} placeholder={"Contact Number"} />
       <TextInputLg bind:text={address}  placeholder={"Address"} />
   
-      <SubmitButton on:click={onSubmit}/>
+      <SubmitButton title="Register" on:click={onSubmit}/>
     </div>
   </div>
 

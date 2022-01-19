@@ -1,5 +1,5 @@
 <script>
-  import NavItems from "./NavItems.svelte";  
+  import NavItems from "./NavItems.svelte"; 
 </script>
 
 <div class="navbar">

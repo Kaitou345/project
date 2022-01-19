@@ -5,8 +5,11 @@
   import Heading from "./components/Heading.svelte";
   import CheckData from "./components/CheckData.svelte";
   import Form from "./components/Form.svelte"; 
+  import {selectedSection} from "./stores"
 </script>
-
 <Navbar />
-<CheckData />
-<!-- <Form /> -->
+{#if $selectedSection===1}
+  <CheckData />
+{:else if $selectedSection===2}
+  <Form />
+{/if}

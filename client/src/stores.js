@@ -11,10 +11,6 @@ export const sections = [
     text: "Register",
     id: 2
   },
-  {
-    text: "Delete",
-    id: 3
-  }
 ];
 
 export const selectedSection = writable(sections[0].id)

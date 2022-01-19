@@ -4,29 +4,43 @@
   import TextInput from "./TextInput.svelte";
   import TextInputLg from "./TextInputLg.svelte";
   import Heading from "./Heading.svelte";
+  import {api} from "../stores";
+  import Message from './Message.svelte';
+import { slide } from "svelte/transition";
+import { text } from "svelte/internal";
 
   export let data;
 
+
+  let loading = false;
+  let done = false;
+  let failed = false;
   async function onSubmit()
   {
+    loading = true;
     const form = new FormData();
 
     form.append("id", data.id)
-
+    
     const response = await fetch(api + "/delete", {
       method: "POST",
       body: form
     });
-
+    
+    done = true;
+    failed = true;
     if(response.ok)
     {
-      console.log("Deleted");
+      loading = false;
+      failed = false;
+      
     }
-
+    setTimeout(() => {done = false}, 3000);
+    
   }
 
 </script>
-<div>
+<div class="info">
   <Heading adjust={true} title="Information" />
   <div class="container">
     <div class="sub-container-1">
@@ -43,6 +57,14 @@
       <TextInputLg label={"Address"} editable={false} bind:text={data.address}  placeholder={"Address"} />
   
       <SubmitButton title="Delete" on:click={onSubmit}/>
+
+      {#if loading}
+        <Message txt = "Deleting information" />
+      {:else if (done && failed) }
+        <Message txt = "Failed to delete" />
+      {:else if (done && !failed) }
+        <Message txt = "Deleted Successfully" />
+      {/if}
     </div>
   </div>
 </div>
@@ -68,6 +90,10 @@
     margin-right: 2rem;
     margin-left: 2rem;
 
+  }
+  .info {
+    margin: 5rem auto;
+    height: 90vh;
   }
 </style>
 
