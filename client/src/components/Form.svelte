@@ -5,6 +5,7 @@
   import Heading from "./Heading.svelte";
   import TextInputLg from "./TextInputLg.svelte";
   import Message from './Message.svelte';
+  import {api} from "../stores";
 
 
   export let name;
@@ -38,7 +39,7 @@
     data.append("img2", img2[0]);
 
 
-    const response = await fetch("http://192.168.1.4:3000/register", {
+    const response = await fetch(api + "/register", {
       method: 'POST',
       body: data
     });

@@ -1,5 +1,5 @@
 <script>
-  export let title = "Register";
+  export let title;
 </script>
 
 <button on:click>{title}</button>

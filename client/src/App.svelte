@@ -8,5 +8,5 @@
 </script>
 
 <Navbar />
-<!-- <CheckData /> -->
-<Form />
+<CheckData />
+<!-- <Form /> -->

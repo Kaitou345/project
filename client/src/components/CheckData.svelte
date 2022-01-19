@@ -3,9 +3,14 @@ import Heading from "./Heading.svelte";
 import ImageInput from './ImageInput.svelte';
 import SubmitButton from './SubmitButton.svelte';
 import Message from "./Message.svelte";
+import Information from "./Information.svelte";
+import {api} from "../stores";
+
 
 let title = "Check Data";
-let file;
+let file = null;
+
+let foundData = null;
 
 
 let found = false;
@@ -15,9 +20,14 @@ let loading = false;
 async function onSubmit() {
   loading = true;
   const data = new FormData();
+  if(!file)
+  {
+    loading = false;
+    return;
+  }
   data.append("img_to_check", file[0]);
 
-  const response = await fetch("http://192.168.1.4:3000/check", {
+  const response = await fetch(api + "/check", {
       method: 'POST',
       body: data
   });
@@ -25,7 +35,9 @@ async function onSubmit() {
   if(response.ok)
   {
     const json = await response.json();
-    console.log(json.data)
+    foundData = json.data;
+    found = true;
+    console.log(foundData);
   }
   else
   {
@@ -47,6 +59,8 @@ async function onSubmit() {
     <Message txt="Checking the image!" />    
   {:else if entered && !found}
     <Message txt="There was no match!" />    
+  {:else if found}
+    <Information data={foundData}/>
   {/if}
 
 </div>
