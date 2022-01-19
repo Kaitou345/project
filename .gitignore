@@ -1,0 +1,13 @@
+node_modules/
+build/
+__pycache__/
+html_prototypes/
+known_faces/
+throwaway/
+unknown_faces/
+test2.py/
+test3.py/
+*.png
+*.jpg
+*.jpeg
+

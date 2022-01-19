@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+:root {
+  --background-color: #202020;
+  --dark-color: #101010; 
+  --highlight-color: #c5a326;
+  --focus-color: #ecbb1c;
+  --field-width: 250px;
+  --field-height: 40px;
+}
+
+body {
+  background-color: var(--background-color);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.4rem;
+  margin: 0;
+  padding: 0;
+  color: #fff
+}
